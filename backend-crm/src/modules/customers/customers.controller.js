@@ -6,5 +6,7 @@ const create   = async (req, res, next) => { try { res.status(201).json({ messag
 const update   = async (req, res, next) => { try { res.json({ message: 'Customer updated.', customer: await svc.update(req.params.id, req.body) }); } catch(e) { next(e); } };
 const remove   = async (req, res, next) => { try { await svc.remove(req.params.id); res.json({ message: 'Customer deleted.' }); } catch(e) { next(e); } };
 const getDevices = async (req, res, next) => { try { res.json({ devices: await svc.getDevices(req.params.id) }); } catch(e) { next(e); } };
-
+if (!req.body.title){
+  res.status(400).json({ message: 'Title is required.' });  
+};
 module.exports = { getAll, getById, create, update, remove, getDevices };

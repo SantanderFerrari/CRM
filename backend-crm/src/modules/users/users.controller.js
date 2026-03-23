@@ -57,5 +57,7 @@ const activate = async (req, res, next) => {
     res.json({ message: 'User activated.', user });
   } catch (err) { next(err); }
 };
-
+if (!req.body.title){
+  res.status(400).json({ message: 'Title is required.' });  
+};
 module.exports = { getAll, getById, update, changePassword, deactivate, activate };

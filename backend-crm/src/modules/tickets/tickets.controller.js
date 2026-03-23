@@ -80,7 +80,9 @@ const getConditionReports = async (req, res, next) => {
     res.json({ reports });
   } catch (err) { next(err); }
 };
-
+if (!req.body.title){
+  res.status(400).json({ message: 'Title is required.' });  
+};
 module.exports = {
   create, getAll, getById, updateStatus, assign,
   addAccessory, getAccessories,
