@@ -15,8 +15,22 @@ const errorHandler = (err, req, res, next) => {
   if (err.code === '23503') {
     return res.status(400).json({ message: 'Referenced record does not exist.' });
   }
+  //POSTGRESQL not null violation
+  if (err.code === '23502') {
+    return res.status(400).json({ message: 'A required field is missing.' });
+  }
+  //PostgreSQL invalid enum value
+  if (err.code === '22P02') {
+    return res.status(400).json({ message: 'Invalid value for field.' });
+  }
+  //Plain object throws from services:throw { status: 404, message: 'Not found.' };
+  if (err.status && err.message && err.stack) {
+    return res.status(err.status).json({ message: err.message });
+  }
 
-  const status  = err.status  || 500;
+  //Standard Error instances 
+
+  const status  = err.status  || err.statusCode || 500;
   const message = err.message || 'Internal server error.';
   res.status(status).json({ message });
 };

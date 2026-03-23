@@ -23,7 +23,7 @@ const createRules = [
     .trim().isLength({ max: 100 }),
   body('notes')
     .optional({ nullable: true })
-    .trim(),
+    .trim().isLength({ max: 500 }),
 ];
 
 // PATCH /api/tickets/:id/status
