@@ -1,7 +1,9 @@
 const usersService = require('./users.service');
+const { asyncHandler } = require('../../utils/asyncHandler');
 
 // GET /api/users
-const getAll = async (req, res, next) => {
+module.exports = {
+getAll : asyncHandler(async (req, res) => {
   try {
     const { role, is_active, limit, offset } = req.query;
     const users = await usersService.getAll({
@@ -12,18 +14,18 @@ const getAll = async (req, res, next) => {
     });
     res.json({ users });
   } catch (err) { next(err); }
-};
+}),
 
 // GET /api/users/:id
-const getById = async (req, res, next) => {
+getById : asyncHandler(async (req, res) => {
   try {
     const user = await usersService.getById(req.params.id);
     res.json({ user });
   } catch (err) { next(err); }
-};
+}),
 
 // PATCH /api/users/:id
-const update = async (req, res, next) => {
+update : asyncHandler(async (req, res) => {
   try {
     // Users can edit only themselves; Admins can edit anyone
     if (req.user.role !== 'ADMIN' && req.user.user_id !== req.params.id) {
@@ -32,30 +34,30 @@ const update = async (req, res, next) => {
     const user = await usersService.update(req.params.id, req.body);
     res.json({ message: 'User updated.', user });
   } catch (err) { next(err); }
-};
+}),
 
 // POST /api/users/change-password
-const changePassword = async (req, res, next) => {
+changePassword : asyncHandler(async (req, res) => {
   try {
     await usersService.changePassword(req.user.user_id, req.body);
     res.json({ message: 'Password changed successfully.' });
   } catch (err) { next(err); }
-};
+}),
 
 // PATCH /api/users/:id/deactivate
-const deactivate = async (req, res, next) => {
+deactivate : asyncHandler(async (req, res) => {
   try {
     const user = await usersService.setActive(req.params.id, false);
     res.json({ message: 'User deactivated.', user });
   } catch (err) { next(err); }
-};
+}),
 
 // PATCH /api/users/:id/activate
-const activate = async (req, res, next) => {
+activate : asyncHandler(async (req, res) => {
   try {
     const user = await usersService.setActive(req.params.id, true);
     res.json({ message: 'User activated.', user });
   } catch (err) { next(err); }
-};
+}),
 
-module.exports = { getAll, getById, update, changePassword, deactivate, activate };
+};
