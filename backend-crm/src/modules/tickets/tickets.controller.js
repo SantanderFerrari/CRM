@@ -3,18 +3,30 @@ const svc = require('./tickets.service');
 // POST /api/tickets
 const create = async (req, res, next) => {
   try {
-    const { ticket, duplicates } = await svc.create(req.body, req.user.user_id);
+    const { title, device_id } = req.body;
+
+    if (!title || !device_id) {
+      return res.status(400).json({
+        message: 'Title and device_id are required.',
+      });
+    }
+
+    const { ticket, duplicates } = await svc.create(
+      req.body,
+      req.user.user_id
+    );
 
     const response = { message: 'Ticket created.', ticket };
 
-    // Warn caller if duplicates were found
     if (duplicates.length > 0) {
-      response.warning  = `${duplicates.length} open ticket(s) found for this device. Ticket auto-linked.`;
+      response.warning = `${duplicates.length} open ticket(s) found for this device. Ticket auto-linked.`;
       response.duplicates = duplicates;
     }
 
     res.status(201).json(response);
-  } catch (err) { next(err); }
+  } catch (err) {
+    next(err);
+  }
 };
 
 // GET /api/tickets
@@ -80,9 +92,7 @@ const getConditionReports = async (req, res, next) => {
     res.json({ reports });
   } catch (err) { next(err); }
 };
-if (!req.body.title){
-  res.status(400).json({ message: 'Title is required.' });  
-};
+
 module.exports = {
   create, getAll, getById, updateStatus, assign,
   addAccessory, getAccessories,
