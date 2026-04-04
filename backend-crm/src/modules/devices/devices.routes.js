@@ -10,4 +10,4 @@ router.get(  '/:id',  ctrl.getById);
 router.post( '/',     authorize('CUSTOMER_CARE', 'ADMIN'), ctrl.create);
 router.patch('/:id',  authorize('CUSTOMER_CARE', 'ADMIN'), ctrl.update);
 
-module.exports = router;
+module.exports = router;.0

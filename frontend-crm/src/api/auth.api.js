@@ -14,3 +14,9 @@ export const logoutRequest = (refreshToken) =>
 
 export const getMeRequest = () =>
   api.get('/auth/me');
+
+export const forgotPasswordRequest = (data) => 
+  api.post('/auth/forgot-password', data);
+
+export const resetPasswordRequest = (data) => 
+  api.post('/auth/password-reset', data);

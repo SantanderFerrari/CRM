@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 import { useAuth } from '../../context/AuthContext';
 import useForm from '../../hooks/useForm';
 
+
 const LoginPage = () => {
   const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ const LoginPage = () => {
                 d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
             </svg>
           </div>
-          <h1 className="text-2xl font-semibold text-gray-900">CRM Portal</h1>
+          <h1 className="text-2xl font-semibold text-gray-900">Dejavu Technologies Solutions CRM Portal</h1>
           <p className="mt-1 text-sm text-gray-500">Sign in to your account</p>
         </div>
 
@@ -90,12 +91,16 @@ const LoginPage = () => {
                 </>
               ) : 'Sign in'}
             </button>
-
+            <p className='text-center text-sm text-gray-500'>
+              <Link to="/forgot-password" className="font-medium text-brand-600 hover:text-brand-700">
+                Forgot your password?
+              </Link>
+            </p>
           </form>
         </div>
 
-        <p className="mt-6 text-center text-xs text-gray-400">
-          CRM v1.0 &mdash; Internal use only
+        <p className="mt-6 text-center text-xs text-red-400">
+          DJV CRM v1.0 &mdash; Internal use only
         </p>
       </div>
     </div>

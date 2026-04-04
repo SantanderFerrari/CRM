@@ -8,10 +8,10 @@ const DashboardPage = () => {
     <AppLayout>
       <div className="p-8">
         <h1 className="text-2xl font-semibold text-gray-900">
-          Good day, {user?.name} 👋
+          Welcome, {user?.name} 👋
         </h1>
-        <p className="mt-1 text-sm text-gray-500">
-          Role: <span className="font-medium">{user?.role}</span>
+        <p className="mt-1 text-sm text-gray-700">
+          Role: <span className="text-black-800 font-medium">{user?.role}</span>
         </p>
         <div className="mt-8 rounded-xl border border-dashed border-gray-300 bg-white p-12 text-center text-gray-400">
           Dashboard coming soon

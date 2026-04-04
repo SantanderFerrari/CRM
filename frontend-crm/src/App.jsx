@@ -4,8 +4,10 @@ import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/common/ProtectedRoute';
 
 import LoginPage       from './pages/auth/LoginPage';
+import ForgotPasswordPage from './pages/auth/ForgotPasswordPage';
 import DashboardPage   from './pages/DashboardPage';
 import UnauthorizedPage from './pages/UnauthorizedPage';
+
 
 const App = () => (
   <BrowserRouter>
@@ -15,7 +17,7 @@ const App = () => (
         toastOptions={{
           duration: 4000,
           style: { fontSize: '14px' },
-          success: { iconTheme: { primary: '#4f46e5', secondary: '#fff' } },
+          success: { iconTheme: { primary: '#e90808', secondary: '#fff' } },
         }}
       />
 
@@ -23,7 +25,7 @@ const App = () => (
         {/* Public */}
         <Route path="/login"        element={<LoginPage />} />
         <Route path="/unauthorized" element={<UnauthorizedPage />} />
-
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         {/* Protected — any authenticated user */}
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<DashboardPage />} />
