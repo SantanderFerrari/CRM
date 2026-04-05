@@ -6,6 +6,10 @@ import ProtectedRoute from './components/common/ProtectedRoute';
 import LoginPage       from './pages/auth/LoginPage';
 import ForgotPasswordPage from './pages/auth/ForgotPasswordPage';
 import DashboardPage   from './pages/DashboardPage';
+import TicketsPage    from './pages/TicketsPage';
+import TicketDetailPage from './pages/TicketsDetailPage';
+import CustomersPage from './pages/CustomersPage';
+import CustomerDetailPage from './pages/CustomerDetailPage';
 import UnauthorizedPage from './pages/UnauthorizedPage';
 
 
@@ -29,6 +33,10 @@ const App = () => (
         {/* Protected — any authenticated user */}
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/tickets" element={<TicketsPage />} />
+          <Route path="/tickets/:id" element={<TicketDetailPage />} />
+          <Route path="/customers" element={<CustomersPage />} />
+          <Route path="/customers/:id" element={<CustomerDetailPage />} />  
         </Route>
 
         {/* Protected — Admin + Supervisor only (example) */}
