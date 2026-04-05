@@ -5,7 +5,8 @@ const authRoutes  = require('./modules/auth/auth.routes.js');
 const usersRoutes = require('./modules/users/users.routes');
 const customersRoutes = require('./modules/customers/customers.routes');
 const devicesRoutes = require('./modules/devices/devices.routes');
-const ticketsRoutes = require('./modules/tickets/tickets.routes');  
+const ticketsRoutes = require('./modules/tickets/tickets.routes'); 
+const dashboardRoutes = require('./modules/dashboard/dashboard.routes'); 
 const errorHandler = require('./middleware/error.middleware');
 
 const app = express();
@@ -27,6 +28,7 @@ app.use('/api/users', usersRoutes);
 app.use('/api/customers', customersRoutes);
 app.use('/api/devices', devicesRoutes);
 app.use('/api/tickets', ticketsRoutes);
+app.use('/api/dashboard', dashboardRoutes);
 
 // ── 404 ───────────────────────────────────────────────────────────────────────
 app.use((req, res) => res.status(404).json({ message: 'Route not found.' }));
