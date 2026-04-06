@@ -7,7 +7,9 @@ const customersRoutes = require('./modules/customers/customers.routes');
 const devicesRoutes = require('./modules/devices/devices.routes');
 const ticketsRoutes = require('./modules/tickets/tickets.routes'); 
 const dashboardRoutes = require('./modules/dashboard/dashboard.routes'); 
+const jobcardsRoutes = require('./modules/jobcards/jobcards.routes');
 const errorHandler = require('./middleware/error.middleware');
+
 
 const app = express();
 
@@ -28,6 +30,7 @@ app.use('/api/users', usersRoutes);
 app.use('/api/customers', customersRoutes);
 app.use('/api/devices', devicesRoutes);
 app.use('/api/tickets', ticketsRoutes);
+app.use('/api/jobcards', jobcardsRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 
 // ── 404 ───────────────────────────────────────────────────────────────────────

@@ -16,6 +16,7 @@ const ROLE_BADGE_COLORS = {
 const NAV_ITEMS = [
   { to: '/dashboard',  label: 'Dashboard',  roles: null }, // null = all roles
   { to: '/tickets',    label: 'Tickets',    roles: null },
+  { to: '/jobcards',   label: 'Job Cards',   roles: ['ADMIN', 'SUPERVISOR', 'TECHNICIAN', 'HEAD_OF_DEPARTMENT'] },
   { to: '/customers',  label: 'Customers',  roles: ['ADMIN', 'CUSTOMER_CARE', 'SUPERVISOR', 'TECHNICIAN'] },
   { to: '/devices',    label: 'Devices',    roles: ['ADMIN', 'CUSTOMER_CARE', 'SUPERVISOR', 'TECHNICIAN'] },
   { to: '/users',      label: 'Users',      roles: ['ADMIN', 'SUPERVISOR', 'HEAD_OF_DEPARTMENT'] },

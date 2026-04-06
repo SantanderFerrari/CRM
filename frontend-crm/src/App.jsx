@@ -10,6 +10,9 @@ import TicketsPage    from './pages/TicketsPage';
 import TicketDetailPage from './pages/TicketsDetailPage';
 import CustomersPage from './pages/CustomersPage';
 import CustomerDetailPage from './pages/CustomerDetailPage';
+import JobCardsPage from './pages/jobcards/JobCardsPage';
+import JobCardDetailPage from './pages/jobcards/JobCardDetailPage';
+import UsersPage from './pages/users/UsersPage';
 import UnauthorizedPage from './pages/UnauthorizedPage';
 
 
@@ -37,11 +40,15 @@ const App = () => (
           <Route path="/tickets/:id" element={<TicketDetailPage />} />
           <Route path="/customers" element={<CustomersPage />} />
           <Route path="/customers/:id" element={<CustomerDetailPage />} />  
+          <Route path="/jobcards" element={<JobCardsPage />} />
+          <Route path="/jobcards/:id" element={<JobCardDetailPage />} />
+
         </Route>
 
         {/* Protected — Admin + Supervisor only (example) */}
         <Route element={<ProtectedRoute roles={['ADMIN', 'SUPERVISOR', 'HEAD_OF_DEPARTMENT']} />}>
           {/* <Route path="/users" element={<UsersPage />} /> */}
+          <Route path="/users" element={<UsersPage />} />
         </Route>
 
         {/* Fallback */}
