@@ -81,6 +81,7 @@ CREATE TABLE customers (
     phone           VARCHAR(30),
     email           VARCHAR(255),
     address         TEXT,
+    kra_pin         VARCHAR(11),            -- KRA PIN (2 letters + 9 digits)
     qb_customer_id  VARCHAR(100),           -- QuickBooks reference
     created_at      TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );

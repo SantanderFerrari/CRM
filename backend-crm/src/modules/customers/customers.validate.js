@@ -18,11 +18,13 @@ const createRules = [
   body('address')
     .optional({ nullable: true })
     .trim(),
-  body('KRA_PIN')
+  body('kra_pin')
     .optional({ nullable: true })
     .trim()
-    .isLength({ max: 11 }).withMessage('KRA_PIN must be at most 11 characters. With 2 letters and 9 digits in between.')
-];
+    .isLength({ max: 11 }).withMessage('KRA PIN must be at most 11 characters. With 2 letters and 9 digits in between.')
+       
+
+  ];
 
 const updateRules = [
   uuidParam('id'),
@@ -40,11 +42,13 @@ const updateRules = [
   body('address')
     .optional({ nullable: true })
     .trim(),
-  body('KRA_PIN')
+  body('kra_pin')
     .optional({ nullable: true })
     .trim()
-    .isLength({ max: 11 }).withMessage('KRA_PIN must be at most 11 characters. With 2 letters and 9 digits in between.')
-];
+    .isLength({ max: 11 }).withMessage('KRA PIN must be  11 characters. With 2 letters and 9 digits in between.')
+      
+
+  ];
 
 const listRules = [
   query('limit').optional().isInt({ min: 1, max: 200 }).withMessage('limit must be 1–200.').toInt(),

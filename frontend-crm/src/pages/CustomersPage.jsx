@@ -52,70 +52,62 @@ const CustomersPage = () => {
           <div className="rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">{error}</div>
         )}
 
-        {/* Grid */}
+        {/* Grid  to table*/}
+        <div className="card p-0 overflow-hidden">
         {loading ? (
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="space-y-0 divide-y divide-gray-100">
             {[...Array(6)].map((_, i) => (
-              <div key={i} className="card animate-pulse space-y-3">
-                <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-gray-200" />
-                  <div className="space-y-1.5 flex-1">
-                    <div className="h-4 w-32 rounded bg-gray-200" />
-                    <div className="h-3 w-24 rounded bg-gray-100" />
-                  </div>
+                <div key={i} className="flex items-center gap-4 px-6 py-4 animate-pulse">
+                  <div className="h-4 w-24 animate-pulse rounded bg-gray-100" />
+                  <div className="h-4 w-32 animate-pulse rounded bg-gray-100" />
+                  <div className="h-4 w-20 animate-pulse rounded bg-gray-100 ml-auto" />
                 </div>
-              </div>
             ))}
           </div>
         ) : customers.length === 0 ? (
-          <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-gray-300 py-16 text-gray-400">
-            <svg className="h-10 w-10 mb-3 text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
+            <div className="flex flex-col items-center justify-center py-16 text-gray-400">
+              <svg className="h-10 w-10 mb-3 text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+              </svg>
             <p className="text-sm font-medium">No customers found</p>
             {search && <p className="text-xs mt-1">Try a different search term</p>}
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {customers.map((c) => (
-              <button
-                key={c.customer_id}
-                onClick={() => navigate(`/customers/${c.customer_id}`)}
-                className="card text-left hover:shadow-md hover:border-gray-300 transition-all duration-150 w-full"
-              >
-                <div className="flex items-start gap-3">
-                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center
-                                  rounded-full bg-brand-100 text-sm font-semibold text-brand-700">
-                    {initials(c.name)}
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="font-semibold text-gray-900 truncate">{c.name}</p>
-                    {c.phone && (
-                      <p className="text-xs text-gray-500 mt-0.5 flex items-center gap-1">
-                        <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.948V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                        </svg>
-                        {c.phone}
-                      </p>
-                    )}
-                    {c.email && (
-                      <p className="text-xs text-gray-400 truncate mt-0.5">{c.email}</p>
-                    )}
-                    {c.address && (
-                      <p className="text-xs text-gray-400 truncate mt-0.5">{c.address}</p>
-                    )}
-                  </div>
-                  <svg className="h-4 w-4 text-gray-300 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
-              </button>
-            ))}
-          </div>
-        )}
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead className="border-b border-gray-100 bg-gray-50">
+                  <tr className="text-xs text-gray-500">
+                    <th className="px-6 py-3 text-left font-medium">Customer</th>
+                    <th className="px-6 py-3 text-left font-medium">Phone</th>
+                    <th className="px-6 py-3 text-left font-medium">Email</th>
+                    <th className="px-6 py-3 text-left font-medium">Address</th>
+                    <th className="px-6 py-3 text-left font-medium">KRA PIN</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-50">
+                  {customers.map((c) => (
+                    <tr
+                      key={c.customer_id}
+                      onClick={() => navigate(`/customers/${c.customer_id}`)}
+                      className="cursor-pointer hover:bg-gray-50 transition"
+                    >
+                      <td className="px-6 py-4 font-medium text-gray-800">{c.name}</td>
+                      <td className="px-6 py-4 text-gray-600">{c.phone}
+                      </td>
+                      <td className="px-6 py-4 text-gray-500">{c.email || '—'}</td>
+                      <td className="px-6 py-4">{c.address || '—'}</td>
+                      <td className="px-6 py-4 text-gray-500">{c.kra_pin || '—'}</td>
+                      <td className="px-6 py-4">
 
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+        )}
+        </div>
       </div>
 
       {showCreate && (

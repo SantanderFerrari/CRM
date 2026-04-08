@@ -2,8 +2,8 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { createDevice, updateDevice } from '../../api/customers.api';
 
-const DEVICE_TYPES = ['Smartphone', 'Laptop', 'Tablet', 'Desktop', 'Printer', 'TV', 'Other'];
-const EMPTY = { serial_number: '', brand: '', model: '', device_type: 'Smartphone' };
+const DEVICE_TYPES = ['ETR', 'Esd', 'Thermal Printer'];
+const EMPTY = { serial_number: '', brand: '', model: '', device_type: 'Comstore Smart VSCU' };
 
 const DeviceFormModal = ({ device, customerId, customerName, onClose, onSaved }) => {
   const isEdit = Boolean(device);
@@ -11,7 +11,7 @@ const DeviceFormModal = ({ device, customerId, customerName, onClose, onSaved })
     serial_number: device.serial_number || '',
     brand:         device.brand         || '',
     model:         device.model         || '',
-    device_type:   device.device_type   || 'Smartphone',
+    device_type:   device.device_type   || 'Comstore Smart VSCU',
   } : EMPTY);
   const [errors,  setErrors]  = useState({});
   const [loading, setLoading] = useState(false);

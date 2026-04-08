@@ -39,6 +39,7 @@ const migrations = [
     phone          VARCHAR(30),
     email          VARCHAR(255),
     address        TEXT,
+    kra_pin        VARCHAR(11),
     qb_customer_id VARCHAR(100),
     created_at     TIMESTAMPTZ  NOT NULL DEFAULT NOW(),
     updated_at     TIMESTAMPTZ  NOT NULL DEFAULT NOW()

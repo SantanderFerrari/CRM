@@ -27,17 +27,20 @@ const getById = async (id) => {
   return rows[0];
 };
 
-const create = async ({ name, phone, email, address, KRA_PIN }) => {
+const create = async ({ name, phone, email, address, kra_pin }) => {
   const { rows } = await db.query(
-    `INSERT INTO customers (name, phone, email, address, KRA_PIN)
+    `INSERT INTO customers (name, phone, email, address, kra_pin)
      VALUES ($1, $2, $3, $4, $5)
      RETURNING *`,
-    [name, phone, email, address, KRA_PIN]
+    [name, phone, email, address, kra_pin||null]
   );
   return rows[0];
 };
 
-const update = async (id, { name, phone, email, address, KRA_PIN }) => {
+
+const update = async (id, { name, phone, email, address, kra_pin }) => {
+  console.log("Model received ID:", id);
+  console.log("Model received Payload:", { name, phone, email, address, kra_pin });
   const fields = [];
   const params = [];
 
@@ -45,9 +48,9 @@ const update = async (id, { name, phone, email, address, KRA_PIN }) => {
   if (phone   !== undefined) { params.push(phone);   fields.push(`phone   = $${params.length}`); }
   if (email   !== undefined) { params.push(email);   fields.push(`email   = $${params.length}`); }
   if (address !== undefined) { params.push(address); fields.push(`address = $${params.length}`); }
-  if (KRA_PIN !== undefined) { params.push(KRA_PIN); fields.push(`KRA_PIN = $${params.length}`); }
+  if (kra_pin !== undefined) { params.push(kra_pin); fields.push(`kra_pin = $${params.length}`); }
 
-  if (!fields.length) throw { status: 400, message: 'No fields to update.' };
+  if (!fields.length) throw { status: 400, message: 'No fields to update raaah.' };
 
   params.push(id);
   const { rows } = await db.query(

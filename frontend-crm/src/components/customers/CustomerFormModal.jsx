@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { createCustomer, updateCustomer } from '../../api/customers.api';
 
-const EMPTY = { name: '', phone: '', email: '', address: '' };
+const EMPTY = { name: '', phone: '', email: '', address: '', kra_pin: '' };
 
 const CustomerFormModal = ({ customer, onClose, onSaved }) => {
   const isEdit = Boolean(customer);
@@ -11,7 +11,7 @@ const CustomerFormModal = ({ customer, onClose, onSaved }) => {
     phone:   customer.phone   || '',
     email:   customer.email   || '',
     address: customer.address || '',
-    KRA_PIN: customer.KRA_PIN || '',
+    kra_pin: customer.kra_pin || '',
   } : EMPTY);
   const [errors,   setErrors]   = useState({});
   const [loading,  setLoading]  = useState(false);
@@ -90,9 +90,9 @@ const CustomerFormModal = ({ customer, onClose, onSaved }) => {
               </div>
               <div>
                 <label className="form-label">KRA PIN</label>
-                <input name="KRA_PIN" className={`input ${errors.KRA_PIN ? 'border-red-400' : ''}`}
-                  placeholder="A123456789B" value={form.KRA_PIN} onChange={handleChange} />
-                {errors.KRA_PIN && <p className="form-error">{errors.KRA_PIN}</p>}
+                <input name="kra_pin" className={`input ${errors.kra_pin ? 'border-red-400' : ''}`}
+                  placeholder="A123456789B" value={form.kra_pin} onChange={handleChange} />
+                {errors.kra_pin && <p className="form-error">{errors.kra_pin}</p>}
               </div>
 
             </div>
