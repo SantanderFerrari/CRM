@@ -11,6 +11,7 @@ const CustomerFormModal = ({ customer, onClose, onSaved }) => {
     phone:   customer.phone   || '',
     email:   customer.email   || '',
     address: customer.address || '',
+    KRA_PIN: customer.KRA_PIN || '',
   } : EMPTY);
   const [errors,   setErrors]   = useState({});
   const [loading,  setLoading]  = useState(false);
@@ -87,6 +88,13 @@ const CustomerFormModal = ({ customer, onClose, onSaved }) => {
                   placeholder="jane@example.com" value={form.email} onChange={handleChange} />
                 {errors.email && <p className="form-error">{errors.email}</p>}
               </div>
+              <div>
+                <label className="form-label">KRA PIN</label>
+                <input name="KRA_PIN" className={`input ${errors.KRA_PIN ? 'border-red-400' : ''}`}
+                  placeholder="A123456789B" value={form.KRA_PIN} onChange={handleChange} />
+                {errors.KRA_PIN && <p className="form-error">{errors.KRA_PIN}</p>}
+              </div>
+
             </div>
 
             <div>

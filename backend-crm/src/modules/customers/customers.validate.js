@@ -18,6 +18,10 @@ const createRules = [
   body('address')
     .optional({ nullable: true })
     .trim(),
+  body('KRA_PIN')
+    .optional({ nullable: true })
+    .trim()
+    .isLength({ max: 11 }).withMessage('KRA_PIN must be at most 11 characters. With 2 letters and 9 digits in between.')
 ];
 
 const updateRules = [
@@ -36,6 +40,10 @@ const updateRules = [
   body('address')
     .optional({ nullable: true })
     .trim(),
+  body('KRA_PIN')
+    .optional({ nullable: true })
+    .trim()
+    .isLength({ max: 11 }).withMessage('KRA_PIN must be at most 11 characters. With 2 letters and 9 digits in between.')
 ];
 
 const listRules = [

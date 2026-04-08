@@ -27,17 +27,17 @@ const getById = async (id) => {
   return rows[0];
 };
 
-const create = async ({ name, phone, email, address }) => {
+const create = async ({ name, phone, email, address, KRA_PIN }) => {
   const { rows } = await db.query(
-    `INSERT INTO customers (name, phone, email, address)
-     VALUES ($1, $2, $3, $4)
+    `INSERT INTO customers (name, phone, email, address, KRA_PIN)
+     VALUES ($1, $2, $3, $4, $5)
      RETURNING *`,
-    [name, phone, email, address]
+    [name, phone, email, address, KRA_PIN]
   );
   return rows[0];
 };
 
-const update = async (id, { name, phone, email, address }) => {
+const update = async (id, { name, phone, email, address, KRA_PIN }) => {
   const fields = [];
   const params = [];
 
@@ -45,6 +45,7 @@ const update = async (id, { name, phone, email, address }) => {
   if (phone   !== undefined) { params.push(phone);   fields.push(`phone   = $${params.length}`); }
   if (email   !== undefined) { params.push(email);   fields.push(`email   = $${params.length}`); }
   if (address !== undefined) { params.push(address); fields.push(`address = $${params.length}`); }
+  if (KRA_PIN !== undefined) { params.push(KRA_PIN); fields.push(`KRA_PIN = $${params.length}`); }
 
   if (!fields.length) throw { status: 400, message: 'No fields to update.' };
 
