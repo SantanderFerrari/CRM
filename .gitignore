@@ -1,0 +1,5 @@
+.env
+crm-backend/node_modules
+crm-frontend/node_modules
+crm-frontend/build
+*.log

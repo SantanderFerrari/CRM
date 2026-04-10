@@ -8,6 +8,7 @@ import AssignModal           from '../components/tickets/AssignModal';
 import useTicket             from '../hooks/useTicket';
 import { useAuth }           from '../context/AuthContext';
 import { addAccessory, addConditionReport } from '../api/tickets.api';
+import { createJobCard }     from '../api/jobcards.api';
 
 const CONDITION_OPTIONS = ['GOOD', 'FAIR', 'DAMAGED', 'CRITICAL'];
 
@@ -37,9 +38,11 @@ const TicketDetailPage = () => {
   // Condition report form
   const [condForm,    setCondForm]    = useState({ condition_summary: 'GOOD', condition_notes: '', inspection_name: '' });
   const [condLoading, setCondLoading] = useState(false);
+  const [jobCardLoading, setJobCardLoading] = useState(false);
 
   const canAssign       = ['CUSTOMER_CARE', 'SUPERVISOR', 'ADMIN'].includes(user?.role);
   const canUpdateStatus = user && ticket && ticket.status !== 'CLOSED';
+  const canCreateJobCard = ['TECHNICIAN', 'SUPERVISOR', 'ADMIN'].includes(user?.role) && ticket?.status === 'IN_PROGRESS';
 
   const handleAddAccessory = async (e) => {
     e.preventDefault();
@@ -66,6 +69,28 @@ const TicketDetailPage = () => {
     } catch (err) {
       toast.error(err.response?.data?.message || 'Failed to save report.');
     } finally { setCondLoading(false); }
+  };
+
+  const handleCreateJobCard = async () => {
+    if (!ticket || ticket.status !== 'IN_PROGRESS') return;
+
+    const technicianId = ticket.assigned_user_id || (user?.role === 'TECHNICIAN' ? user.user_id : null);
+    if (!technicianId) {
+      toast.error('Job card cannot be created until a technician is assigned.');
+      return;
+    }
+
+    setJobCardLoading(true);
+    try {
+      const payload = { ticket_id: ticket.ticket_id, technician_id: technicianId };
+      const { data } = await createJobCard(payload);
+      toast.success('Job card created.');
+      navigate(`/jobcards/${data.job_card.job_card_id}`);
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Failed to create job card.');
+    } finally {
+      setJobCardLoading(false);
+    }
   };
 
   if (loading) return (
@@ -119,6 +144,15 @@ const TicketDetailPage = () => {
               {canAssign && (
                 <button onClick={() => setShowAssign(true)} className="btn-secondary w-auto px-4 text-xs">
                   {ticket.assigned_to ? 'Reassign' : 'Assign'}
+                </button>
+              )}
+              {canCreateJobCard && (
+                <button
+                  onClick={handleCreateJobCard}
+                  disabled={jobCardLoading}
+                  className="btn-secondary w-auto px-4 text-xs"
+                >
+                  {jobCardLoading ? 'Creating...' : 'Create job card'}
                 </button>
               )}
               {canUpdateStatus && (

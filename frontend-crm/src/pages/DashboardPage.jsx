@@ -97,8 +97,8 @@ const DashboardPage = () => {
           <div className="card lg:col-span-2">
             <h2 className="text-sm font-semibold text-gray-700 mb-4">Tickets created — last 14 days</h2>
             {loading
-              ? <div className="h-32 animate-pulse rounded bg-gray-100" />
-              : <BarChart data={data?.daily_tickets ?? []} color="#4f46e5" height={120} />
+              ? <div className="h-16 animate-pulse rounded bg-gray-100" />
+              : <BarChart data={data?.daily_tickets ?? []} color="#4f46e5" height={25} />
             }
           </div>
         </div>

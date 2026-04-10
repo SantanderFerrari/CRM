@@ -1,4 +1,4 @@
-const BarChart = ({ data = [], color = '#4f46e5', height = 120 }) => {
+const BarChart = ({ data = [], color = '#4f46e5', height = 25 }) => {
   if (!data.length) return (
     <div className="flex h-full items-center justify-center text-sm text-gray-400">
       No data yet

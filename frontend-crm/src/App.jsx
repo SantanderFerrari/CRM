@@ -12,6 +12,7 @@ import CustomersPage from './pages/CustomersPage';
 import CustomerDetailPage from './pages/CustomerDetailPage';
 import JobCardsPage from './pages/jobcards/JobCardsPage';
 import JobCardDetailPage from './pages/jobcards/JobCardDetailPage';
+import DevicesPage from './pages/devices/DevicePage';
 import UsersPage from './pages/users/UsersPage';
 import UnauthorizedPage from './pages/UnauthorizedPage';
 
@@ -42,6 +43,7 @@ const App = () => (
           <Route path="/customers/:id" element={<CustomerDetailPage />} />  
           <Route path="/jobcards" element={<JobCardsPage />} />
           <Route path="/jobcards/:id" element={<JobCardDetailPage />} />
+          <Route path="/devices" element={<DevicesPage />} />
 
         </Route>
 

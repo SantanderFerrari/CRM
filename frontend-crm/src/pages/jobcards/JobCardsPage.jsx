@@ -114,7 +114,7 @@ const JobCardsPage = () => {
                       : null;
                     return (
                       <tr key={jc.job_card_id}
-                        onClick={() => navigate(`/job-cards/${jc.job_card_id}`)}
+                        onClick={() => navigate(`/jobcards/${jc.job_card_id}`)}
                         className="cursor-pointer hover:bg-gray-50 transition">
                         <td className="px-6 py-4 font-medium text-gray-800">{jc.customer_name}</td>
                         <td className="px-6 py-4 text-gray-600">{jc.technician_name}</td>
