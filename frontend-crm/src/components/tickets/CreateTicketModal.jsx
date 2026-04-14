@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { getCustomers, getDevicesByCustomer, createTicket } from '../../api/tickets.api';
+import CustomerFormModal from '../customers/CustomerFormModal';
 
 const TICKET_TYPES = ['REPAIR', 'DIAGNOSTIC', 'WARRANTY', 'UPGRADE', 'OTHER'];
 
@@ -224,6 +225,7 @@ const CreateTicketModal = ({ onClose, onCreated }) => {
         {/* Footer */}
         <div className="flex justify-between border-t border-gray-100 px-6 py-4">
           <button onClick={onClose} className="btn-secondary w-auto px-5">Cancel</button>
+          <button onClick={() => setShowCreate(true)} className='btn-secondary w-auto px-10'>Create Customer</button>
           <div className="flex gap-3">
             {step > 1 && (
               <button onClick={() => setStep(step - 1)} className="btn-secondary w-auto px-5">Back</button>
@@ -243,7 +245,17 @@ const CreateTicketModal = ({ onClose, onCreated }) => {
         </div>
 
       </div>
+      {showCreate && (
+        <CustomerFormModal
+          onClose={() => setShowCreate(false)}
+          onCreated={(customer) => {
+            setShowCreate(false);
+            navigate(`/customers/${customer.customer_id}`);
+          }}
+        />
+      )}
     </div>
+    
   );
 };
 

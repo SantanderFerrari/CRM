@@ -14,10 +14,22 @@ const errorHandler = require('./middleware/error.middleware');
 const app = express();
 
 // ── Global middleware ────────────────────────────────────────────────────────
+const rawOrigins = String(process.env.CLIENT_ORIGIN || 'http://localhost:3000');
+const allowedOrigins = rawOrigins
+  .split(',')
+  .map((o) => o.trim())
+  .filter(Boolean);
+
 app.use(cors({
-  origin: process.env.CLIENT_ORIGIN || 'http://localhost:3000',
+  origin: (origin, callback) => {
+    // Allow requests with no origin (Postman, curl, server-to-server)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    callback(new Error(`CORS: origin ${origin} not allowed.`));
+  },
   credentials: true,
 }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

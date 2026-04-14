@@ -8,7 +8,7 @@ services:
     environment:
       POSTGRES_DB:       ${DB_NAME:-crm_database}
       POSTGRES_USER:     ${DB_USER:-postgres}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-2020}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
     volumes:
       - postgres_data:/var/lib/postgresql/data
       # Run schema on first boot
@@ -29,7 +29,7 @@ services:
     build:
       context: ./backend-crm
       dockerfile: Dockerfile
-    container_name: backend-crm
+    container_name: crm-backend
     restart: unless-stopped
     depends_on:
       postgres:
@@ -41,13 +41,13 @@ services:
       DB_PORT:                5432
       DB_NAME:                ${DB_NAME:-crm_database}
       DB_USER:                ${DB_USER:-postgres}
-      DB_PASSWORD:            ${DB_PASSWORD:-postgres}
+      DB_PASSWORD:            ${DB_PASSWORD:-2020}
       JWT_SECRET:             ${JWT_SECRET}
       JWT_EXPIRES_IN:         ${JWT_EXPIRES_IN:-8h}
       JWT_REFRESH_SECRET:     ${JWT_REFRESH_SECRET}
       JWT_REFRESH_EXPIRES_IN: ${JWT_REFRESH_EXPIRES_IN:-7d}
       BCRYPT_ROUNDS:          ${BCRYPT_ROUNDS:-12}
-      CLIENT_ORIGIN:          ${CLIENT_ORIGIN:-http://localhost:80}
+      CLIENT_ORIGIN:          ${CLIENT_ORIGIN:-http://localhost:80,http://localhost:3000,http://localhost}
     ports:
       - "${BACKEND_PORT:-5000}:5000"
     healthcheck:
@@ -67,7 +67,7 @@ services:
       args:
         # At build time the browser needs the public-facing API URL
         REACT_APP_API_URL: ${REACT_APP_API_URL:-http://localhost:5000/api}
-    container_name: frontend-crm
+    container_name: crm-frontend
     restart: unless-stopped
     depends_on:
       crm-backend:
