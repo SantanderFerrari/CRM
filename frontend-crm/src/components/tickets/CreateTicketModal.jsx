@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { getCustomers, getDevicesByCustomer, createTicket } from '../../api/tickets.api';
 import CustomerFormModal from '../customers/CustomerFormModal';
+import { useNavigate } from 'react-router-dom';
 
 const TICKET_TYPES = ['REPAIR', 'DIAGNOSTIC', 'WARRANTY', 'UPGRADE', 'OTHER'];
 
@@ -12,7 +13,8 @@ const CreateTicketModal = ({ onClose, onCreated }) => {
   const [search,    setSearch]    = useState('');
   const [loading,   setLoading]   = useState(false);
   const [submitting,setSubmitting]= useState(false);
-
+  const [showCreate, setShowCreate] = useState(false);
+  const navigate  = useNavigate();
   const [selected, setSelected] = useState({
     customer: null,
     device:   null,

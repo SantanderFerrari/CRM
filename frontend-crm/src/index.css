@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-gray-100 text-gray-900 antialiased;
+    @apply bg-gray-50 text-gray-900 antialiased;
   }
 }
 
@@ -39,6 +39,25 @@
   }
 
   .card {
-    @apply rounded-2xl border border-gray-200 bg-white p-6 shadow-sm;
+    @apply rounded-2xl border border-gray-200 bg-white p-4 sm:p-6 shadow-sm;
+  }
+
+  /* Responsive page padding — compact on mobile, roomier on desktop */
+  .page-container {
+    @apply p-4 sm:p-6 space-y-4 sm:space-y-5;
+  }
+
+  /* Responsive table wrapper — horizontal scroll on small screens */
+  .table-container {
+    @apply overflow-x-auto -mx-4 sm:mx-0;
+  }
+
+  /* Responsive table cells — tighter padding on mobile */
+  .table-cell {
+    @apply px-3 py-3 sm:px-6 sm:py-4;
+  }
+
+  .table-header-cell {
+    @apply px-3 py-2.5 sm:px-6 sm:py-3 text-left text-xs font-medium text-gray-500;
   }
 }
