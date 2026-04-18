@@ -12,7 +12,8 @@
     "migrate:users-phone": "node src/db/migrate_users_phone.js",
     "migrate:jobcards": "node src/db/migrate_jobcards.js",
     "migrate:kra-pin": "node src/db/migrate_kra_pin.js",
-    "migrate:leave-funds": "node src/db/migrate_leave_funds.js"
+    "migrate:leave-funds": "node src/db/migrate_leave_funds.js",
+    "swagger":"node src/swagger.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -23,6 +24,8 @@
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.11.5",
     "swagger": "^0.7.5",
+    "swagger-jsdoc":"^6.2.8",
+    "swagger-ui-express":"^5.0.1",
     "uuid": "^9.0.1"
   },
   "devDependencies": {

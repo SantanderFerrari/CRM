@@ -11,11 +11,12 @@ const jobcardsRoutes = require('./modules/jobcards/jobcards.routes');
 const leaveRoutes = require('./modules/leave/leave.routes');
 const fundsRoutes = require('./modules/funds/funds.routes');
 const errorHandler = require('./middleware/error.middleware');
-
+const swaggerUi      = require('swagger-ui-express');
+const swaggerSpec    = require('./swagger.js');
 
 const app = express();
 
-// ── Global middleware ────────────────────────────────────────────────────────
+// ── Global middleware ------  CORS ────────────────────────────────────────────────────────
 const rawOrigins = String(process.env.CLIENT_ORIGIN || 'http://localhost:3000');
 const allowedOrigins = rawOrigins
   .split(',')
@@ -34,6 +35,26 @@ app.use(cors({
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+
+// ── Swagger UI (for development) ───────────────────────────────────────
+app.use('/api/swagger', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
+    customSiteTitle: 'CRM API Documentation',
+    swaggerOptions: {
+    persistAuthorization: true,  //Keeps token between page refreshes
+    docExpansion: 'none',
+    displayRequestDuration: true,
+    filter: true,
+    tryItOutEnabled: true,
+  },
+}));   
+
+// Exposr raw swagger spec for external tools i.e POSTMAN, SWAGGER-UI, etc.
+app.get('/swagger.json', (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(require(swaggerSpec));
+});
+
 
 // ── Health check ─────────────────────────────────────────────────────────────
 app.get('/health', (req, res) => res.json({ status: 'ok', ts: new Date() }));
