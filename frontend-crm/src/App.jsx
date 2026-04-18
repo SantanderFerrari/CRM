@@ -14,6 +14,9 @@ import JobCardsPage from './pages/jobcards/JobCardsPage';
 import JobCardDetailPage from './pages/jobcards/JobCardDetailPage';
 import DevicesPage from './pages/devices/DevicePage';
 import UsersPage from './pages/users/UsersPage';
+import ProfilePage from './pages/profile/ProfilePage';
+import LeavePage from './pages/leave/LeavePage';
+import FundsPage from './pages/funds/FundsPage';
 import UnauthorizedPage from './pages/UnauthorizedPage';
 
 
@@ -44,6 +47,9 @@ const App = () => (
           <Route path="/jobcards" element={<JobCardsPage />} />
           <Route path="/jobcards/:id" element={<JobCardDetailPage />} />
           <Route path="/devices" element={<DevicesPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/leave" element={<LeavePage />} />
+          <Route path="/funds" element={<FundsPage />} /> 
 
         </Route>
 

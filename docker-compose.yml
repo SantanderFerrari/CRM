@@ -100,6 +100,8 @@ services:
         node src/db/migrate_password_reset.js &&
         node src/db/migrate_users_phone.js &&
         node src/db/migrate_jobcards.js
+        node src/db/migrate_kra_pin.js &&
+        node src/db/migrate_leave_funds.js
       "
     networks:
       - crm-network

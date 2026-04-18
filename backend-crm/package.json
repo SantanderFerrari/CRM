@@ -11,7 +11,8 @@
     "migrate:reset": "node src/db/migrate_password_reset.js",
     "migrate:users-phone": "node src/db/migrate_users_phone.js",
     "migrate:jobcards": "node src/db/migrate_jobcards.js",
-    "migrate:kra-pin": "node src/db/migrate_kra_pin.js"
+    "migrate:kra-pin": "node src/db/migrate_kra_pin.js",
+    "migrate:leave-funds": "node src/db/migrate_leave_funds.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

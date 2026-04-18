@@ -8,6 +8,8 @@ const devicesRoutes = require('./modules/devices/devices.routes');
 const ticketsRoutes = require('./modules/tickets/tickets.routes'); 
 const dashboardRoutes = require('./modules/dashboard/dashboard.routes'); 
 const jobcardsRoutes = require('./modules/jobcards/jobcards.routes');
+const leaveRoutes = require('./modules/leave/leave.routes');
+const fundsRoutes = require('./modules/funds/funds.routes');
 const errorHandler = require('./middleware/error.middleware');
 
 
@@ -44,6 +46,8 @@ app.use('/api/devices', devicesRoutes);
 app.use('/api/tickets', ticketsRoutes);
 app.use('/api/jobcards', jobcardsRoutes);
 app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/leave', leaveRoutes);
+app.use('/api/funds', fundsRoutes);
 
 // ── 404 ───────────────────────────────────────────────────────────────────────
 app.use((req, res) => res.status(404).json({ message: 'Route not found.' }));
