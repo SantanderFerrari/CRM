@@ -6,18 +6,21 @@ import useDevices         from '../../hooks/useDevices';
 import { useAuth }        from '../../context/AuthContext';
 import { getCustomers }   from '../../api/customers.api';
 
-const DEVICE_TYPES = ['Smartphone', 'Laptop', 'Tablet', 'Desktop', 'Printer', 'TV', 'Other'];
+const DEVICE_TYPES = ['ETR', 'ESD', 'Thermal_Printer', 'All_in_one_Desktop', 'Printer', 'AndroidPOS', 'Tablet', 'cash_register', 'barcode_scanner', 'Other'];
 
 // Device type icon — simple SVG paths per type
 const DeviceIcon = ({ type }) => {
   const paths = {
-    Smartphone: 'M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z',
-    Laptop:     'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
-    Tablet:     'M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z',
-    Desktop:    'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+    ETR: 'M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z',
+    ESD:     'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+    Thermal_Printer:     'M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z',
+    All_in_one_Desktop :    'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
     Printer:    'M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z',
-    TV:         'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
-    Other:      'M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z',
+    AndroidPOS:         'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+    Tablet:      'M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z',
+    cash_register: 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+    barcode_scanner: 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+    Other:      'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
   };
   return (
     <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -27,12 +30,15 @@ const DeviceIcon = ({ type }) => {
 };
 
 const TYPE_COLORS = {
-  Smartphone: 'bg-blue-50   text-blue-600',
-  Laptop:     'bg-purple-50 text-purple-600',
-  Tablet:     'bg-teal-50   text-teal-600',
-  Desktop:    'bg-indigo-50 text-indigo-600',
+  ETR: 'bg-blue-50   text-blue-600',
+  ESD:     'bg-purple-50 text-purple-600',
+  Thermal_Printer:     'bg-teal-50   text-teal-600',
+  All_in_one_Desktop:    'bg-indigo-50 text-indigo-600',
   Printer:    'bg-orange-50 text-orange-600',
-  TV:         'bg-pink-50   text-pink-600',
+  AndroidPOS:         'bg-pink-50   text-pink-600',
+  Tablet:      'bg-green-50   text-green-600',
+  cash_register: 'bg-yellow-50   text-yellow-600',
+  barcode_scanner: 'bg-red-50   text-red-600',
   Other:      'bg-gray-50   text-gray-500',
 };
 

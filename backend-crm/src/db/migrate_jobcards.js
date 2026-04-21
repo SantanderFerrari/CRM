@@ -132,8 +132,10 @@ const migrations = [
     description TEXT        NOT NULL,
     created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW()
   );
-
-  CREATE INDEX IF NOT EXISTS idx_incidents_job_card ON incident_logs(job_card_id);
+ 
+  CREATE TABLE IF NOT EXISTS devices (
+    updated_at  TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  );
   `,
 
   // ── TRIGGERS ──────────────────────────────────────────────────────

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { createDevice, updateDevice } from '../../api/customers.api';
 
-const DEVICE_TYPES = ['ETR', 'Esd', 'Thermal Printer'];
+const DEVICE_TYPES = ['ETR', 'ESD', 'Thermal Printer', 'All in one Desktop', 'Printer', 'Android POS', 'Tablet', 'Cash Register', 'Barcode Scanner', 'Other'];
 const EMPTY = { serial_number: '', brand: '', model: '', device_type: 'Comstore Smart VSCU' };
 
 const DeviceFormModal = ({ device, customerId, customerName, onClose, onSaved }) => {
@@ -79,12 +79,12 @@ const DeviceFormModal = ({ device, customerId, customerName, onClose, onSaved })
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="form-label">Brand</label>
-                <input name="brand" className="input" placeholder="Samsung"
+                <input name="brand" className="input" placeholder="Comstore..."
                   value={form.brand} onChange={handleChange} autoFocus />
               </div>
               <div>
                 <label className="form-label">Model</label>
-                <input name="model" className="input" placeholder="Galaxy S23"
+                <input name="model" className="input" placeholder="FC4..."
                   value={form.model} onChange={handleChange} />
               </div>
             </div>
@@ -92,7 +92,7 @@ const DeviceFormModal = ({ device, customerId, customerName, onClose, onSaved })
             <div>
               <label className="form-label">Serial number</label>
               <input name="serial_number" className={`input ${errors.serial_number ? 'border-red-400' : ''}`}
-                placeholder="SN-20240001" value={form.serial_number} onChange={handleChange} />
+                placeholder="KRAMW0170000000001" value={form.serial_number} onChange={handleChange} />
               {errors.serial_number && <p className="form-error">{errors.serial_number}</p>}
             </div>
 
