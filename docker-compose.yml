@@ -93,6 +93,10 @@ services:
       DB_NAME:     ${DB_NAME:-crm_database}
       DB_USER:     ${DB_USER:-postgres}
       DB_PASSWORD: ${DB_PASSWORD:-postgres}
+      SEED_ADMIN_NAME: ${SEED_ADMIN_NAME:-Admin}
+      SEED_ADMIN_EMAIL: ${SEED_ADMIN_EMAIL:-admin@dejavu.com}
+      SEED_ADMIN_PASSWORD: ${SEED_ADMIN_PASSWORD}
+      SEED_ADMIN_PHONE: ${SEED_ADMIN_PHONE:-0799999999}
     command: >
       sh -c "
         node src/db/migrate.js &&

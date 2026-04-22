@@ -1,0 +1,43 @@
+{
+  "compilerOptions": {
+    /* ── Output ──────────────────────────────────────────────────────── */
+    "target": "esnext",
+    "module": "esnext",
+    "outDir": "./dist",
+    "rootDir": "./src",
+
+    /* ── Interop ─────────────────────────────────────────────────────── */
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+
+    /* ── Migration-safe: JS files still compile, not type-checked ─────── */
+    "allowJs": true,
+    "checkJs": false,
+
+    /* ── Strictness: off during migration, enable per-file with @ts-check */
+    "strict": false,
+    "noImplicitAny": false,
+
+    /* ── Path aliases ────────────────────────────────────────────────── */
+    "moduleResolution": "bundler",
+    "paths": {
+      "*":["./*"],
+      "@db":          ["./db/index.ts"],
+      "@middleware/*":["./middleware/*"],
+      "@utils/*":     ["./utils/*"],
+      "@modules/*":   ["./modules/*"],
+      "@types/*":     ["./types/*"]
+    },
+
+    /* ── Source maps for readable stack traces ───────────────────────── */
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    /* ── Skip checking bundled .d.ts files to speed compile ──────────── */
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts"]
+}

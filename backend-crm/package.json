@@ -2,18 +2,22 @@
   "name": "backend-crm",
   "version": "1.0.0",
   "description": "CRM Backend API",
-  "main": "src/server.js",
+  "main": "dist/server.js",
   "scripts": {
-    "start": "node src/server.js",
-    "dev": "nodemon src/server.js",
-    "migrate": "node src/db/migrate.js",
-    "migrate-tickets": "node src/db/migrate_tickets.js",
-    "migrate:reset": "node src/db/migrate_password_reset.js",
-    "migrate:users-phone": "node src/db/migrate_users_phone.js",
-    "migrate:jobcards": "node src/db/migrate_jobcards.js",
-    "migrate:kra-pin": "node src/db/migrate_kra_pin.js",
-    "migrate:leave-funds": "node src/db/migrate_leave_funds.js",
-    "swagger":"node src/swagger.js"
+    "build":"tsc --project tsconfig.json",
+    "build:match":"tsc --project tsconfig.json --watch",
+    "start": "node dist/server.js",
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "dev:js":"nodemon src/server.js",
+    "migrate": "ts-node src/db/migrate.js",
+    "migrate-tickets": "ts-node src/db/migrate_tickets.js",
+    "migrate:reset": "ts-node src/db/migrate_password_reset.js",
+    "migrate:users-phone": "ts-node src/db/migrate_users_phone.js",
+    "migrate:jobcards": "ts-node src/db/migrate_jobcards.js",
+    "migrate:kra-pin": "ts-node src/db/migrate_kra_pin.js",
+    "migrate:leave-funds": "ts-node src/db/migrate_leave_funds.js",
+    "swagger":"ts-node src/swagger.js",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -29,6 +33,19 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/node": "^20.14.8",
+    "@types/pg": "^8.11.6",
+    "@types/uuid":"^9.0.8",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.6",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.4.5"
+
   }
 }
